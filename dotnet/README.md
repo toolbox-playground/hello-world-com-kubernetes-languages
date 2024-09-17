@@ -71,10 +71,11 @@ kubectl config set-context --current --namespace=my-namespace
 ```bash
 kubectl apply -f manifest.yaml
 ```
+![docker images](./img/docker-ps.png)
 
 6. No fim disso, você terá uma aplicação rodando em cima de um container, como mostra a imagem a seguir. Além disso, você poderá acessar a aplicação através de http://localhost:30000 após o deploy.
 
-![docker images](./img/docker-ps.png)
+![docker images](./img/app.png)
 
 [Opcional]  A criação do Deployment e do Serviço também podem ser feito via linha de comando e sem a necessidade da criação do manifesto, mas encorajamos que criem o manifesto por ser uma boa prática.
 
