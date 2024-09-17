@@ -6,11 +6,11 @@
 Para usar o projeto Hello World .Net com K8s, siga estes passos:
 
 
-1. Certifique-se que você está dentro do diretório `k8s-exemplos-deployments/docker-images/dotnet`.
+1. Certifique-se que você está dentro do diretório `hello-world-com-kubernetes-languages/dotnet`.
 
 2. Construa a imagem Docker:
 ```bash
-docker build -t hello-world-dotnet:latest
+docker build -t hello-world-dotnet:latest .
 ```
 Obs.: Certifique-se que seu Docker está rodando.
 
