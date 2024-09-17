@@ -182,6 +182,6 @@ kubectl get events
 
 ![docker images](./img/events.png)
 
-6. [Opcional] Se você tiver o kubernetes lens ou docker desktop instalados localmente, explore também os recursos utilizando a UI que essas ferramentas fornecem, como mostramos a seguir:
+6. [Opcional] Se você tiver o [Kubernetes Lens](https://k8slens.dev/) ou [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalados localmente, explore também os recursos utilizando a UI que essas ferramentas fornecem, como mostramos a seguir:
 
 ![docker images](./img/docker-desktop.png)
