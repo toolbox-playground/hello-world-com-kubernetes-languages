@@ -51,7 +51,12 @@ kind create cluster --config kind-config.yaml --name <nome-do--novo-cluster>
 kubectl config use-context <nome-do-cluster>
 ```
 
-3. [Opcional] Você pode usar o namespace default existente ou criar um novo
+3. Carregue a imagem docker no cluster:
+```bash
+kind load docker-image localhost/hello-world-dotnet --name <nome-do-cluster>
+```
+
+4. [Opcional] Você pode usar o namespace default existente ou criar um novo
 ```bash
 # Listar os namespaces existentes
 kubectl get namespaces
@@ -62,11 +67,6 @@ kubectl config set-context --current --namespace=<namespace-name>
 # Se desejar criar e usar um namespace novo chamado 'my-namespace' ao invés de usar um namespace default existente
 kubectl create namespace my-namespace
 kubectl config set-context --current --namespace=my-namespace
-```
-
-4. Carregue a imagem docker no cluster:
-```bash
-kind load docker-image localhost/hello-world-dotnet --name <nome-do-cluster>
 ```
 
 Agora que temos um cluster e namespace funcionando e configurado, vamos criar o manifesto Kubernetes para fazer o deploy desta aplicação. Crie um arquivo chamado [manifest.yaml](manifest.yaml) no diretório da aplicação (e.g. `touch manifest.yaml` dentro do diretório `hello-world-com-docker-languages/dotnet/`) e adicione o seguinte conteúdo neste novo arquivo:
