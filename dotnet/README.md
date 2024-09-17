@@ -43,7 +43,9 @@ kind version
 kubectl config get-contexts
 
 # Se não existir nenhum cluster ativo, ou se você preferir criar um novo cluster com Kind
-kind create cluster --name <nome-do--novo-cluster>
+# O arquivo kind-config.yaml é um arquivo de configuração para o Kind (Kubernetes in Docker). Ele define como o cluster Kubernetes será configurado e quais são as características dos nós (nodes) que compõem o cluster.
+#kind create cluster --name <nome-do--novo-cluster> 
+kind create cluster --config kind-config.yaml --name <nome-do--novo-cluster>
 
 # Mudar para um contexto de cluster específico
 kubectl config use-context <nome-do-cluster>
@@ -60,6 +62,11 @@ kubectl config set-context --current --namespace=<namespace-name>
 # Se desejar criar e usar um namespace novo chamado 'my-namespace' ao invés de usar um namespace default existente
 kubectl create namespace my-namespace
 kubectl config set-context --current --namespace=my-namespace
+```
+
+4. Carregue a imagem docker no cluster:
+```bash
+kind load docker-image localhost/hello-world-dotnet --name <nome-do-cluster>
 ```
 
 Agora que temos um cluster e namespace funcionando e configurado, vamos criar o manifesto Kubernetes para fazer o deploy desta aplicação. Crie um arquivo chamado [manifest.yaml](manifest.yaml) no diretório da aplicação (e.g. `touch manifest.yaml` dentro do diretório `hello-world-com-docker-languages/dotnet/`) e adicione o seguinte conteúdo neste novo arquivo:
@@ -114,7 +121,19 @@ Para aplicar este manifesto e fazer o deploy da aplicação no seu cluster Kuber
 kubectl apply -f manifest.yaml
 ```
 
-No fim disso, você terá uma aplicação rodando em cima de um container, como mostra a imagem a seguir. Além disso, você poderá acessar a aplicação através de http://localhost:30000 após o deploy.
+Para acessar um serviço no cluster Kubernetes usando Kind, você pode seguir os seguintes passos:
+
+1. Verifique o serviço: Certifique-se de que o serviço está corretamente configurado e em execução. Você pode verificar isso com o comando:
+```bash
+kubectl get services
+```
+
+2. Encaminhamento de porta (Port Forwarding): Use o comando kubectl port-forward para encaminhar uma porta do seu localhost para o serviço no cluster. Por exemplo, se o serviço estiver rodando na porta 8080 e você quiser encaminhar essa porta para o localhost, use o seguinte comando:
+```bash
+kubectl port-forward svc/<nome-do-servico> 30000:8080
+```
+
+3. No fim disso, você terá uma aplicação rodando em cima de um container, como mostra a imagem a seguir. Além disso, você poderá acessar a aplicação através de http://localhost:30000 após o deploy.
 
 ![docker images](./img/docker-ps.png)
 
