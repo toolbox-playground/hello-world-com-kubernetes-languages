@@ -13,7 +13,15 @@ Um repositório com "Hello World" nas seguintes linguagens usando Kubernetes:
 
 ## Uso
 
-1. Certifique-se de ter o Git instalado em sua máquina. Você pode baixar e instalar o Git a partir do site oficial: [https://git-scm.com/book/en/v2/Getting-Started-Installing-Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+1. Certifique-se de ter instaldos:
+
+a. Git: instalar Git a partir do [site oficial](https://git-scm.com/downloads).
+
+b. Docker: a base para rodar contêineres. Você pode baixá-lo e instalá-lo a partir do [site oficial do Docker](https://docs.docker.com/get-docker/).
+
+c. Kind (Kubernetes in Docker): permite executar clusters Kubernetes utilizando contêineres Docker. É ideal para testes rápidos e desenvolvimento local. Instale o Kind seguindo [estas instruções](https://kind.sigs.k8s.io/docs/user/quick-start/#installation).
+
+d. kubectl: a linha de comando do Kubernetes para gerenciar clusters e contêineres. Instale o kubectl seguindo as instruções disponíveis na [documentação oficial do Kubernetes](https://kubernetes.io/releases/download/#kubectl).
 
 2. Abra o terminal ou prompt de comando e navegue até um diretório de sua prefrência. Substitua `suapasta` pelo nome do seu diretório:
    ```bash

@@ -6,30 +6,20 @@
 Para usar o projeto Hello World .Net com K8s, siga estes passos:
 
 
-1. Certifique-se de ter instaldos:
+1. Certifique-se que você está dentro do diretório `k8s-exemplos-deployments/docker-images/dotnet`.
 
-a. Git: instalar Git a partir do [site oficial](https://git-scm.com/downloads).
-
-b. Docker: a base para rodar contêineres. Você pode baixá-lo e instalá-lo a partir do [site oficial do Docker](https://docs.docker.com/get-docker/).
-
-c. Kind (Kubernetes in Docker): permite executar clusters Kubernetes utilizando contêineres Docker. É ideal para testes rápidos e desenvolvimento local. Instale o Kind seguindo [estas instruções](https://kind.sigs.k8s.io/docs/user/quick-start/#installation).
-
-d. kubectl: a linha de comando do Kubernetes para gerenciar clusters e contêineres. Instale o kubectl seguindo as instruções disponíveis na [documentação oficial do Kubernetes](https://kubernetes.io/releases/download/#kubectl).
-
-2. Certifique-se que você está dentro do diretório `k8s-exemplos-deployments/docker-images/dotnet`.
-
-3. Construa a imagem Docker:
+2. Construa a imagem Docker:
 ```bash
 docker build -t hello-world-dotnet:latest
 ```
 Obs.: Certifique-se que seu Docker está rodando.
 
-4. Taggear a imagem para garantir que ela corresponda ao nome que será usado no Kubernetes:
+3. Taggear a imagem para garantir que ela corresponda ao nome que será usado no Kubernetes:
 ```bash
 docker tag hello-world-dotnet:latest localhost/hello-world-dotnet:latest
 ```
 
-5. Por último, verifique se a imagem foi criada corretamente:
+4. Por último, verifique se a imagem foi criada corretamente:
 ```bash
 docker images localhost/hello-world-dotnet
 ```
