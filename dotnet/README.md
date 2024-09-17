@@ -43,8 +43,6 @@ kind version
 kubectl config get-contexts
 
 # Se não existir nenhum cluster ativo, ou se você preferir criar um novo cluster com Kind
-# O arquivo kind-config.yaml é um arquivo de configuração para o Kind (Kubernetes in Docker). Ele define como o cluster Kubernetes será configurado e quais são as características dos nós (nodes) que compõem o cluster.
-#kind create cluster --name <nome-do--novo-cluster> 
 kind create cluster --config kind-config.yaml --name <nome-do--novo-cluster>
 
 # Mudar para um contexto de cluster específico
@@ -69,71 +67,12 @@ kubectl create namespace my-namespace
 kubectl config set-context --current --namespace=my-namespace
 ```
 
-Agora que temos um cluster e namespace funcionando e configurado, vamos criar o manifesto Kubernetes para fazer o deploy desta aplicação. Crie um arquivo chamado [manifest.yaml](manifest.yaml) no diretório da aplicação (e.g. `touch manifest.yaml` dentro do diretório `hello-world-com-docker-languages/dotnet/`) e adicione o seguinte conteúdo neste novo arquivo:
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
- name: dotnet-hello-world
-spec:
- replicas: 1
- selector:
-   matchLabels:
-     app: dotnet-hello-world
- template:
-   metadata:
-     labels:
-       app: dotnet-hello-world
-   spec:
-     containers:
-     - name: dotnet-hello-world
-       image: localhost/hello-world-dotnet:latest
-       imagePullPolicy: IfNotPresent
-       ports:
-       - containerPort: 8080
-       resources:
-         requests:
-           cpu: "250m"
-           memory: "256Mi"
-         limits:
-           cpu: "500m"
-           memory: "512Mi"
-
----
-apiVersion: v1
-kind: Service
-metadata:
- name: dotnet-hello-world-service
-spec:
- type: NodePort
- ports:
- - port: 8080
-   nodePort: 30000   #Altere a porta do node o quanto você quiser em um range de 30000-32767
- selector:
-   app: dotnet-hello-world
-```
-
-Este arquivo define um Deployment e um Service para a aplicação. O Deployment específica que queremos uma réplica da aplicação rodando, e o Service expõe a aplicação na porta 30000 do nó.
-
-Para aplicar este manifesto e fazer o deploy da aplicação no seu cluster Kubernetes, use o comando:
+5. Para aplicar o [manifest.yaml](manifest.yaml) e fazer o deploy da aplicação no seu cluster Kubernetes, use o comando:
 ```bash
 kubectl apply -f manifest.yaml
 ```
 
-Para acessar um serviço no cluster Kubernetes usando Kind, você pode seguir os seguintes passos:
-
-1. Verifique o serviço: Certifique-se de que o serviço está corretamente configurado e em execução. Você pode verificar isso com o comando:
-```bash
-kubectl get services
-```
-
-2. Encaminhamento de porta (Port Forwarding): Use o comando kubectl port-forward para encaminhar uma porta do seu localhost para o serviço no cluster. Por exemplo, se o serviço estiver rodando na porta 8080 e você quiser encaminhar essa porta para o localhost, use o seguinte comando:
-```bash
-kubectl port-forward svc/<nome-do-servico> 30000:8080
-```
-
-3. No fim disso, você terá uma aplicação rodando em cima de um container, como mostra a imagem a seguir. Além disso, você poderá acessar a aplicação através de http://localhost:30000 após o deploy.
+6. No fim disso, você terá uma aplicação rodando em cima de um container, como mostra a imagem a seguir. Além disso, você poderá acessar a aplicação através de http://localhost:30000 após o deploy.
 
 ![docker images](./img/docker-ps.png)
 
@@ -157,6 +96,10 @@ kubectl get service my-deployment --namespace=my-namespace
 ## Explicando o manifesto k8s
 
 O manifesto do Kubernetes define a configuração e o comportamento dos recursos no cluster. As partes essenciais do manifesto incluem o tipo de recurso (kind), especificações (spec), e configurações dos contêineres (containers) com detalhes sobre imagens, portas, e recursos de computação.
+
+## Explicando o [kind-config.yaml](kind-config.yaml)
+
+O arquivo kind-config.yaml é um arquivo de configuração para o Kind (Kubernetes in Docker). Ele define como o cluster Kubernetes será configurado e quais são as características dos nós (nodes) que compõem o cluster.
 
 ### Diferença entre kubectl apply e kubectl create:
 
