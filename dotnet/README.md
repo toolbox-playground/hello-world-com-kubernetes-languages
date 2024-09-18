@@ -212,4 +212,6 @@ kubectl get nodes -o wide
 
 Após executar o comando copie o INTERNAL-IP e cole no navegador adicionando :30000, exemplo 172.21.0.2:30000
 
-3. Caso deseje mapear a porta 30000 na criação do cluster, substitua o comando `kind create cluster --name <nome-do--novo-cluster>` por `kind create cluster --config kind-config.yaml --name <nome-do--novo-cluster>`. O arquivo [kind-config.yaml](kind-config.yaml) é um arquivo de configuração para o Kind (Kubernetes in Docker). Ele define como o cluster Kubernetes será configurado e quais são as características dos nós (nodes) que compõem o cluster. Nesse arquivo está sendo mapeada a porta 30000. Após fazer todos os passos, é só acessar http://localhost:30000
+3. Caso deseje mapear a porta 30000 na criação do cluster, em [Deploy com Kubernetes](#deploy-com-kubernetes) substitua o comando `kind create cluster --name <nome-do--novo-cluster>` por `kind create cluster --config kind-config.yaml --name <nome-do--novo-cluster>`
+
+O arquivo [kind-config.yaml](kind-config.yaml) é um arquivo de configuração para o Kind (Kubernetes in Docker). Ele define como o cluster Kubernetes será configurado e quais são as características dos nós (nodes) que compõem o cluster. Nesse arquivo está sendo mapeada a porta 30000. Após fazer terminar os passos [Deploy com Kubernetes](#deploy-com-kubernetes) é só acessar http://localhost:30000
