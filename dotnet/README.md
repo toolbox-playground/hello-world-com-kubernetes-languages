@@ -179,9 +179,9 @@ kubectl get events
  
 ### ErrImagePull
 
-![Err Image Pull](./img/errpullimage.png)
+![Err Image Pull](./img/errimagepull.png)
 
-![Err Image Pull Log](./img/errpullimagelog.png)
+![Err Image Pull Log](./img/errimagepulllogs.png)
 
 Esse erro significa que a imagem docker solicitada no [manifest.yaml](manifest.yaml) não foi encontrada no cluster Kind.
 Para resolver, carregue a imagem docker no cluster:
