@@ -1,7 +1,7 @@
 # Hello World Go com K8s
 ![Toolbox](../img/toolbox-playground.png)
 
-Para usar o projeto Hello World .Net com K8s, siga estes passos:
+Para usar o projeto Hello World Go com K8s, siga estes passos:
 
 1. Certifique-se que você está dentro do diretório `hello-world-com-kubernetes-languages/go`.
 
