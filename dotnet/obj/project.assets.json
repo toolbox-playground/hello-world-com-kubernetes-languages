@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/media/marcelo/HDD/htdocs/toolbox/hello-world-com-docker-languages/dotnet/dotnet.csproj",
+      "projectUniqueName": "/media/marcelo/HDD/htdocs/toolbox/hello-world-com-kubernetes-languages/dotnet/dotnet.csproj",
       "projectName": "dotnet",
-      "projectPath": "/media/marcelo/HDD/htdocs/toolbox/hello-world-com-docker-languages/dotnet/dotnet.csproj",
+      "projectPath": "/media/marcelo/HDD/htdocs/toolbox/hello-world-com-kubernetes-languages/dotnet/dotnet.csproj",
       "packagesPath": "/home/marcelo/.nuget/packages/",
-      "outputPath": "/media/marcelo/HDD/htdocs/toolbox/hello-world-com-docker-languages/dotnet/obj/",
+      "outputPath": "/media/marcelo/HDD/htdocs/toolbox/hello-world-com-kubernetes-languages/dotnet/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/marcelo/.nuget/NuGet/NuGet.Config"
@@ -62,7 +62,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,10 +1,7 @@
 # Hello World .Net com K8s
 ![Toolbox](../img/toolbox-playground.png)
 
-## Uso Local
-
 Para usar o projeto Hello World .Net com K8s, siga estes passos:
-
 
 1. Certifique-se que você está dentro do diretório `hello-world-com-kubernetes-languages/dotnet`.
 
@@ -43,18 +40,13 @@ kind version
 kubectl config get-contexts
 
 # Se não existir nenhum cluster ativo, ou se você preferir criar um novo cluster com Kind
-kind create cluster --config kind-config.yaml --name <nome-do--novo-cluster>
+kind create cluster --name <nome-do--novo-cluster>
 
 # Mudar para um contexto de cluster específico
 kubectl config use-context <nome-do-cluster>
 ```
 
-3. Carregue a imagem docker no cluster:
-```bash
-kind load docker-image localhost/hello-world-dotnet --name <nome-do-cluster>
-```
-
-4. [Opcional] Você pode usar o namespace default existente ou criar um novo
+3. [Opcional] Você pode usar o namespace default existente ou criar um novo
 ```bash
 # Listar os namespaces existentes
 kubectl get namespaces
@@ -67,13 +59,13 @@ kubectl create namespace my-namespace
 kubectl config set-context --current --namespace=my-namespace
 ```
 
-5. Para aplicar o [manifest.yaml](manifest.yaml) e fazer o deploy da aplicação no seu cluster Kubernetes, use o comando:
+4. Para aplicar o [manifest.yaml](manifest.yaml) e fazer o deploy da aplicação no seu cluster Kubernetes, use o comando:
 ```bash
 kubectl apply -f manifest.yaml
 ```
 ![docker images](./img/docker-ps.png)
 
-6. No fim disso, você terá uma aplicação rodando em cima de um container, como mostra a imagem a seguir. Além disso, você poderá acessar a aplicação através de http://localhost:30000 após o deploy.
+5. No fim disso, você terá uma aplicação rodando em cima de um container, como mostra a imagem a seguir. Além disso, você poderá acessar a aplicação através de http://localhost:30000 após o deploy.
 
 ![docker images](./img/app.png)
 
@@ -88,7 +80,7 @@ kubectl create deployment my-deployment --image=localhost/hello-world-dotnet:lat
 kubectl get deployments --namespace=my-namespace
 
 # Expor o deployment 'my-deployment' via NodePort
-kubectl expose deployment caio-deployment --type=LoadBalancer --port=80 --target-port=3000 --protocol=TCP
+kubectl expose deployment my-deployment --type=NodePort --port=8080 --target-port=3000 --protocol=TCP
 
 # Obter o serviço exposto para encontrar o NodePort atribuído
 kubectl get service my-deployment --namespace=my-namespace
@@ -97,10 +89,6 @@ kubectl get service my-deployment --namespace=my-namespace
 ## Explicando o manifesto k8s
 
 O manifesto do Kubernetes define a configuração e o comportamento dos recursos no cluster. As partes essenciais do manifesto incluem o tipo de recurso (kind), especificações (spec), e configurações dos contêineres (containers) com detalhes sobre imagens, portas, e recursos de computação.
-
-## Explicando o [kind-config.yaml](kind-config.yaml)
-
-O arquivo kind-config.yaml é um arquivo de configuração para o Kind (Kubernetes in Docker). Ele define como o cluster Kubernetes será configurado e quais são as características dos nós (nodes) que compõem o cluster.
 
 ### Diferença entre kubectl apply e kubectl create:
 
@@ -186,3 +174,42 @@ kubectl get events
 6. [Opcional] Se você tiver o [Kubernetes Lens](https://k8slens.dev/) ou [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalados localmente, explore também os recursos utilizando a UI que essas ferramentas fornecem, como mostramos a seguir:
 
 ![docker images](./img/docker-desktop.png)
+
+## Erros comuns
+ 
+### ErrImagePull
+
+![Err Image Pull](./img/errpullimage.png)
+
+![Err Image Pull Log](./img/errpullimagelog.png)
+
+Esse erro significa que a imagem docker solicitada no [manifest.yaml](manifest.yaml) não foi encontrada no cluster Kind.
+Para resolver, carregue a imagem docker no cluster:
+```bash
+kind load docker-image localhost/hello-world-dotnet --name <nome-do-cluster>
+```
+
+### Não consegue acessar pelo http://localhost:30000
+
+O docker trabalha com tipos diferentes de rede em cada OS. Para saber mais acesse este [link](https://docs.docker.com/engine/network/).
+
+Para resolver, vou mostrar possíveis soluções:
+
+1. Port-forward:
+Faça um [port-forward](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/) executando o comando abaixo e depois acesse http://localhost:30000:
+```bash
+kubectl port-forward svc/dotnet-hello-world-service 30000:8080
+```
+
+![Err Image Pull Log](./img/port-forward.png)
+
+2. Node IP:
+Acesse por meio do Node IP executando o comando abaixo:
+```bash
+kubectl get nodes -o wide
+```
+![Node IP](./img/node_ip.png)
+
+Após executar o comando copie o INTERNAL-IP e cole no navegador adicionando :30000, exemplo 172.21.0.2:30000
+
+3. Caso deseje mapear a porta 30000 na criação do cluster, substitua o comando `kind create cluster --name <nome-do--novo-cluster>` por `kind create cluster --config kind-config.yaml --name <nome-do--novo-cluster>`. O arquivo [kind-config.yaml](kind-config.yaml) é um arquivo de configuração para o Kind (Kubernetes in Docker). Ele define como o cluster Kubernetes será configurado e quais são as características dos nós (nodes) que compõem o cluster. Nesse arquivo está sendo mapeada a porta 30000. Após fazer todos os passos, é só acessar http://localhost:30000

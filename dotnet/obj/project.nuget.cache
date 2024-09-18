@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OdKlnZQ34EVOKCkh3DPF23R7Zbkqy596L1fpI8blB7YZtwldQX1hU1rj7qTr3G4bkof+6fmflzn3AcTTxPIm2A==",
+  "dgSpecHash": "tX7dk70RlU0YPME0marCnMREmJfQjzHoLBbd4T6jUopuLk6h2oaOdD4fGh4YJIHAlxFfm2R4wfcjN2NbunTL3w==",
   "success": true,
-  "projectFilePath": "/media/marcelo/HDD/htdocs/toolbox/hello-world-com-docker-languages/dotnet/dotnet.csproj",
+  "projectFilePath": "/media/marcelo/HDD/htdocs/toolbox/hello-world-com-kubernetes-languages/dotnet/dotnet.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
