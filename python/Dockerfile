@@ -13,8 +13,8 @@ RUN pip3 install -r requirements.txt
 # Copia todos os arquivos do diretório atual para o diretório de trabalho
 COPY . .
 
-# Exporta a porta 5000
-EXPOSE 5000
+# Exporta a porta 8080
+EXPOSE 8080
 
 # Define o comando a ser executado quando o container for iniciado
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8080"]
