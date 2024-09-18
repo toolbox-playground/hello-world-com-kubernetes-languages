@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: java-hello-world
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: java-hello-world
+ template:
+   metadata:
+     labels:
+       app: java-hello-world
+   spec:
+     containers:
+     - name: java-hello-world
+       image: localhost/hello-world-java:latest
+       imagePullPolicy: IfNotPresent
+       ports:
+       - containerPort: 8080
+       resources:
+         requests:
+           cpu: "250m"
+           memory: "256Mi"
+         limits:
+           cpu: "500m"
+           memory: "512Mi"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: java-hello-world-service
+spec:
+ type: NodePort
+ ports:
+ - port: 8080
+   nodePort: 30000   #Altere a porta do node o quanto você quiser em um range de 30000-32767
+ selector:
+   app: java-hello-world
