@@ -80,7 +80,7 @@ kubectl create deployment my-deployment --image=localhost/hello-world-dotnet:lat
 kubectl get deployments --namespace=my-namespace
 
 # Expor o deployment 'my-deployment' via NodePort
-kubectl expose deployment my-deployment --type=NodePort --port=8080 --target-port=3000 --protocol=TCP
+kubectl expose deployment my-deployment --type=NodePort --port=8080 --target-port=30000 --protocol=TCP
 
 # Obter o serviço exposto para encontrar o NodePort atribuído
 kubectl get service my-deployment --namespace=my-namespace
