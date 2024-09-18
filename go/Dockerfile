@@ -1,5 +1,5 @@
 # Use a imagem base do Golang
-FROM golang:latest
+FROM golang:alpine
 
 # Defina o diretório de trabalho dentro do contêiner
 WORKDIR /app
