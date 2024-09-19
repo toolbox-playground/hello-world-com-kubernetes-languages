@@ -189,6 +189,8 @@ Para resolver, carregue a imagem docker no cluster:
 kind load docker-image localhost/hello-world-go --name <nome-do-cluster>
 ```
 
+![Kind Load](./img/kind-load.png)
+
 ### Não consegue acessar pelo http://localhost:30000
 
 O docker trabalha com tipos diferentes de rede em cada OS. Para saber mais acesse este [link](https://docs.docker.com/engine/network/).
