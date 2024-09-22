@@ -63,11 +63,11 @@ kubectl config set-context --current --namespace=my-namespace
 ```bash
 kubectl apply -f manifest.yaml
 ```
-![docker images](./img/docker-ps.png)
+![docker ps](./img/docker-ps.png)
 
 5. No fim disso, você terá uma aplicação rodando em cima de um container, como mostra a imagem a seguir. Além disso, você poderá acessar a aplicação através de http://localhost:30000 após o deploy.
 
-![docker images](./img/app.png)
+![app](./img/app.png)
 
 [Opcional]  A criação do Deployment e do Serviço também podem ser feito via linha de comando e sem a necessidade da criação do manifesto, mas encorajamos que criem o manifesto por ser uma boa prática.
 
@@ -177,7 +177,7 @@ kubectl get events
 
 ## Erros comuns
  
-### ErrImagePull
+### ErrImagePull ou ImagePullBackOff
 
 ![Err Image Pull](./img/errimagepull.png)
 
@@ -188,6 +188,8 @@ Para resolver, carregue a imagem docker no cluster:
 ```bash
 kind load docker-image localhost/hello-world-nodejs --name <nome-do-cluster>
 ```
+
+![Kind Load](./img/kind-load.png)
 
 ### Não consegue acessar pelo http://localhost:30000
 
