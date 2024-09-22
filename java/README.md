@@ -177,7 +177,7 @@ kubectl get events
 
 ## Erros comuns
  
-### ErrImagePull
+### ErrImagePull ou ImagePullBackOff
 
 ![Err Image Pull](./img/errimagepull.png)
 
