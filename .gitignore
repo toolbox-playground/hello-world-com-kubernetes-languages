@@ -1,5 +1,6 @@
 nodejs/node_modules/
 python/venv/
 *.sln
+.github
 
 node_modules/*

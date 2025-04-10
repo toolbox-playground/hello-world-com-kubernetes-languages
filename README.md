@@ -81,6 +81,76 @@ git clone https://github.com/toolbox-playground/hello-world-com-kubernetes-langu
    ```
 2. Siga as instruções do [Go](./go/README.md)
 
+## Comandos Kubernetes Úteis
+
+Aqui está uma lista de comandos Kubernetes úteis para gerenciar seus recursos:
+
+### Gerenciamento de Namespace
+```bash
+# Criar um namespace
+kubectl create namespace <nome-do-namespace>
+
+# Listar pods em um namespace específico
+kubectl get pods --namespace=<nome-do-namespace>
+```
+
+### Gerenciamento de Pods e Deployments
+```bash
+# Criar um pod
+kubectl run <nome-do-pod> --image=<nome-da-imagem> --namespace=<nome-do-namespace>
+
+# Ver logs de um pod
+kubectl logs <nome-do-pod> --namespace=<nome-do-namespace>
+
+# Criar um deployment
+kubectl create deployment <nome-do-deployment> --image=<nome-da-imagem> --namespace=<nome-do-namespace>
+
+# Expor um deployment como serviço
+kubectl expose deployment <nome-do-deployment> --type=NodePort --port=<porta> --namespace=<nome-do-namespace>
+
+# Verificar serviço exposto
+kubectl get service <nome-do-service> --namespace=<nome-do-namespace>
+
+# Escalar um deployment
+kubectl scale deployment <nome-do-deployment> --replicas=<número-de-réplicas> --namespace=<nome-do-namespace>
+
+# Descrever um deployment
+kubectl describe deployment <nome-do-deployment> --namespace=<nome-do-namespace>
+```
+
+### Limpeza de Recursos
+```bash
+# Deletar um pod
+kubectl delete pod <nome-do-pod> --namespace=<nome-do-namespace>
+
+# Deletar um deployment
+kubectl delete deployment <nome-do-deployment> --namespace=<nome-do-namespace>
+
+# Deletar um serviço
+kubectl delete service <nome-do-service> --namespace=<nome-do-namespace>
+
+# Deletar um namespace
+kubectl delete namespace <nome-do-namespace>
+```
+
+### Gerenciamento de Cluster
+```bash
+# Verificar nós do cluster
+kubectl get nodes
+
+# Listar todos os clusters disponíveis
+kubectl config get-contexts
+
+# Mudar para um contexto de cluster específico
+kubectl config use-context <nome-do-contexto>
+```
+
+### Docker (para Kind)
+```bash
+# Encontrar IP do node (útil quando usando Kind)
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -q --filter "name=kind-control-plane")
+```
+
 ## Contribuindo
 
 Contribuições são bem-vindas! Por favor, leia o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para mais detalhes.
